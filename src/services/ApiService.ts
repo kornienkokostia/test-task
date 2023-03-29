@@ -1,4 +1,5 @@
-import { UsersResponse } from '../models/users';
+import { PositionsResponse } from '../models/positions';
+import { Token, UsersResponse } from '../models/users';
 import { useHttp } from './http.hook';
 
 const ApiService = () => {
@@ -8,8 +9,21 @@ const ApiService = () => {
   const getAllUsers = async (page: number = 1) =>
     (await request(`${_apiBase}/users/?page=${page}&count=6`)) as UsersResponse;
 
+  const getPositions = async () =>
+    (await request(`${_apiBase}/positions`)) as PositionsResponse;
+
+  const addUser = async (body: FormData, token: string) =>
+    (await request(`${_apiBase}/users`, 'POST', body, {
+      Token: token,
+    })) as any;
+
+  const getToken = async () => (await request(`${_apiBase}/token`)) as Token;
+
   return {
     getAllUsers,
+    getPositions,
+    addUser,
+    getToken,
   };
 };
 

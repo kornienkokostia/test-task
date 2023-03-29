@@ -23,3 +23,8 @@ export interface User {
   registration_timestamp: number;
   photo: string;
 }
+
+export interface Token {
+  success: boolean;
+  token: string;
+}

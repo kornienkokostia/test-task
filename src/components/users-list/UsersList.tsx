@@ -8,9 +8,14 @@ interface UserProps {
   user: User;
 }
 
-export const UsersList = () => {
-  const { users, totalPages, currentPage, setCurrentPage } = useUser();
+interface Props {
+  users: User[];
+  currentPage: number;
+  totalPages: number | null;
+  setCurrentPage: React.Dispatch<React.SetStateAction<number>>;
+}
 
+export const UsersList = (props: Props) => {
   const User = (props: UserProps) => {
     const curUser = props.user;
     return (
@@ -31,26 +36,26 @@ export const UsersList = () => {
         </div>
         <div className="user-info">
           <p>{curUser.position}</p>
-          <p>{curUser.email}</p>
-          <p>{curUser.phone}</p>
+          <p title={curUser.email}>{curUser.email}</p>
+          <p title={curUser.phone}>{curUser.phone}</p>
         </div>
       </div>
     );
   };
 
   return (
-    <section className="users-list-container">
+    <section className="users-list-container section" id="users">
       <h1 className="users-list-title">Working with GET request</h1>
       <div className="users-list">
-        {users.map((el, i) => {
+        {props.users.map((el, i) => {
           return <User user={el} key={i} />;
         })}
       </div>
       <button
         className="btn"
         onClick={() => {
-          if (currentPage < totalPages) {
-            setCurrentPage(prev => (prev += 1));
+          if (props.currentPage < props.totalPages!) {
+            props.setCurrentPage(prev => (prev += 1));
           }
         }}>
         Show more

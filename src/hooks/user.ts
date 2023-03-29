@@ -4,19 +4,25 @@ import ApiService from '../services/ApiService';
 
 export const useUser = () => {
   const [users, setUsers] = useState<User[]>([]);
-  const [totalPages, setTotalPages] = useState(0);
-  const [currentPage, setCurrentPage] = useState(1);
+  const [totalPages, setTotalPages] = useState<number | null>(null);
+  const [currentPage, setCurrentPage] = useState<number>(1);
 
   useEffect(() => {
-    onRequest(currentPage);
+    updateUsers(currentPage);
   }, [currentPage]);
 
-  const onRequest = async (page: number = 1) => {
+  const updateUsers = async (page: number = 1) => {
     const usersResponse = await ApiService().getAllUsers(page);
-    setUsers(usersResponse.users);
-    setTotalPages(usersResponse.total_pages);
-    console.log(usersResponse);
+
+    if (page === 1) {
+      setUsers(usersResponse.users);
+    } else {
+      setUsers([...users, ...usersResponse.users]);
+    }
+    if (totalPages === null) {
+      setTotalPages(usersResponse.total_pages);
+    }
   };
 
-  return { users, totalPages, currentPage, setCurrentPage, onRequest };
+  return { users, totalPages, currentPage, setCurrentPage, updateUsers };
 };
