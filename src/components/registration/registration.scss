@@ -37,10 +37,18 @@
   }
 }
 
+@media (any-pointer: fine) and (max-width: 412px) {
+  .main .registration {
+    &-form {
+      width: calc(100vw - 48px);
+    }
+  }
+}
+
 @media (max-width: 412px) {
   .registration {
     &-form {
-      width: calc(100% - 32px);
+      width: calc(100vw - 32px);
     }
   }
 }
