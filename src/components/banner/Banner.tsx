@@ -15,7 +15,9 @@ export const Banner = () => {
           mind. They should also be excited to learn, as the world of Front-End
           Development keeps evolving.
         </p>
-        <button className="btn">Sign up</button>
+        <a href="#registration" className="btn">
+          Sign up
+        </a>
       </div>
     </section>
   );

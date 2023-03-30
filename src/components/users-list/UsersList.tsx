@@ -3,6 +3,7 @@ import './usersList.scss';
 import { User } from '../../models/users';
 import photoCover from './../../assets/photo-cover.svg';
 import { useUser } from '../../hooks/user';
+import { Preloader } from '../preloader/Preloader';
 
 interface UserProps {
   user: User;
@@ -13,6 +14,7 @@ interface Props {
   currentPage: number;
   totalPages: number | null;
   setCurrentPage: React.Dispatch<React.SetStateAction<number>>;
+  usersLoading: boolean;
 }
 
 export const UsersList = (props: Props) => {
@@ -47,9 +49,13 @@ export const UsersList = (props: Props) => {
     <section className="users-list-container section" id="users">
       <h1 className="users-list-title">Working with GET request</h1>
       <div className="users-list">
-        {props.users.map((el, i) => {
-          return <User user={el} key={i} />;
-        })}
+        {props.usersLoading ? (
+          <Preloader />
+        ) : (
+          props.users.map((el, i) => {
+            return <User user={el} key={i} />;
+          })
+        )}
       </div>
       <button
         className="btn"

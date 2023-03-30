@@ -6,6 +6,7 @@ export const useUser = () => {
   const [users, setUsers] = useState<User[]>([]);
   const [totalPages, setTotalPages] = useState<number | null>(null);
   const [currentPage, setCurrentPage] = useState<number>(1);
+  const [usersLoading, setUsersLoading] = useState<boolean>(true);
 
   useEffect(() => {
     updateUsers(currentPage);
@@ -22,7 +23,15 @@ export const useUser = () => {
     if (totalPages === null) {
       setTotalPages(usersResponse.total_pages);
     }
+    setUsersLoading(false);
   };
 
-  return { users, totalPages, currentPage, setCurrentPage, updateUsers };
+  return {
+    users,
+    totalPages,
+    currentPage,
+    setCurrentPage,
+    updateUsers,
+    usersLoading,
+  };
 };

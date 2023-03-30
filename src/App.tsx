@@ -6,8 +6,14 @@ import { Registration } from './components/registration/Registration';
 import { useUser } from './hooks/user';
 
 function App() {
-  const { users, totalPages, currentPage, setCurrentPage, updateUsers } =
-    useUser();
+  const {
+    users,
+    totalPages,
+    currentPage,
+    setCurrentPage,
+    updateUsers,
+    usersLoading,
+  } = useUser();
 
   return (
     <div className="app-container">
@@ -20,6 +26,7 @@ function App() {
             currentPage={currentPage}
             totalPages={totalPages}
             setCurrentPage={setCurrentPage}
+            usersLoading={usersLoading}
           />
           <Registration updateUsers={updateUsers} />
         </main>

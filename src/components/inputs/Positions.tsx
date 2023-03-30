@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Position } from '../../models/positions';
 import ApiService from '../../services/ApiService';
 import './positions.scss';
+import { Preloader } from '../preloader/Preloader';
 
 interface PositionsProps {
   currentPosition: number;
@@ -10,6 +11,7 @@ interface PositionsProps {
 
 export const Positions = (props: PositionsProps) => {
   const [positions, setPositions] = useState<Position[]>();
+  const [positionsLoading, setPositionsLoading] = useState<boolean>(true);
 
   useEffect(() => {
     onRequest();
@@ -19,12 +21,16 @@ export const Positions = (props: PositionsProps) => {
     const positionsResponse = await ApiService().getPositions();
     setPositions(positionsResponse.positions);
     props.setCurrentPosition(positionsResponse.positions[0].id);
+    setPositionsLoading(false);
   };
 
   return (
     <div className="registration-positions">
       <p>Select your position</p>
-      {positions &&
+      {positionsLoading ? (
+        <Preloader />
+      ) : (
+        positions &&
         positions.map((el, i) => {
           return (
             <div className="registration-position" key={i}>
@@ -44,7 +50,8 @@ export const Positions = (props: PositionsProps) => {
               <div className="registration-position-custom-input"></div>
             </div>
           );
-        })}
+        })
+      )}
     </div>
   );
 };

@@ -2,6 +2,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  position: relative;
   &-form {
     display: flex;
     flex-direction: column;
@@ -9,5 +10,37 @@
   }
   & .btn {
     align-self: center;
+  }
+  &-success {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    row-gap: 50px;
+    &-container {
+      display: flex;
+      align-items: center;
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      background-color: var(--main-grey);
+      z-index: 10;
+      visibility: hidden;
+      opacity: 0;
+      &.active {
+        visibility: visible;
+        opacity: 1;
+      }
+    }
+    &-title {
+      text-align: center;
+    }
+  }
+}
+
+@media (max-width: 412px) {
+  .registration {
+    &-form {
+      width: calc(100% - 32px);
+    }
   }
 }

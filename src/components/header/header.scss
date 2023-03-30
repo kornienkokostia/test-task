@@ -5,7 +5,10 @@
   width: calc(100% - 120px);
   padding: 0 60px;
   height: 60px;
+  max-width: 1170px;
   &-container {
+    display: flex;
+    justify-content: center;
     background-color: #ffffff;
     width: 100%;
   }
@@ -16,5 +19,19 @@
   &-btns {
     display: flex;
     column-gap: 10px;
+  }
+}
+
+@media (max-width: 768px) {
+  .header {
+    width: calc(100% - 64px);
+    padding: 0 32px;
+  }
+}
+
+@media (max-width: 412px) {
+  .header {
+    width: calc(100% - 32px);
+    padding: 0 16px;
   }
 }

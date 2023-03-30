@@ -9,6 +9,7 @@ interface InputProps {
   helperText?: string;
   errorText: string;
   errorHandler: (str: string) => boolean;
+  setFiledsFocused: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 export const TextInput = (props: InputProps) => {
@@ -41,8 +42,12 @@ export const TextInput = (props: InputProps) => {
           if (props.inputVal.length === 0) {
             checkFiled(e.currentTarget);
           }
+          props.setFiledsFocused(true);
         }}
-        onBlur={e => checkFiled(e.currentTarget)}
+        onBlur={e => {
+          checkFiled(e.currentTarget);
+          props.setFiledsFocused(false);
+        }}
       />
       {props.helperText && filedValid && (
         <div className="registration-input-helper">{props.helperText}</div>

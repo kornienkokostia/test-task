@@ -8,10 +8,12 @@ export const Header = () => {
       <div className="header">
         <img src={logo} alt="logo" className="header-logo" />
         <div className="header-btns">
-          <button className="btn">
-            <a href="#users"></a>Users
-          </button>
-          <button className="btn">Sign up</button>
+          <a href="#users" className="btn">
+            Users
+          </a>
+          <a href="#registration" className="btn">
+            Sign up
+          </a>
         </div>
       </div>
     </header>

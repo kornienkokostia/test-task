@@ -1,0 +1,18 @@
+.spinner {
+  width: 48px;
+  height: 48px;
+  align-self: center;
+  justify-self: center;
+  grid-column: 1/4;
+  border-radius: 100%;
+  animation: spin 1s infinite linear;
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}

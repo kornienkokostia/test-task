@@ -4,6 +4,7 @@
   width: calc(100% - 120px);
   gap: 29px;
   margin-bottom: 50px;
+  min-height: 537px;
   &-container {
     & .btn {
       width: 120px;
@@ -43,5 +44,27 @@
   &-name {
     width: 100%;
     text-align: center;
+  }
+}
+
+@media (min-width: 1170px) {
+  .users-list {
+    width: 100%;
+  }
+}
+
+@media (max-width: 768px) {
+  .users-list {
+    grid-template-columns: repeat(2, calc(50% - 8px));
+    width: calc(100% - 64px);
+    gap: 16px;
+  }
+}
+@media (max-width: 412px) {
+  .users-list {
+    grid-template-columns: repeat(1, 100%);
+    width: calc(100% - 32px);
+    gap: 16px;
+    margin-bottom: 70px;
   }
 }

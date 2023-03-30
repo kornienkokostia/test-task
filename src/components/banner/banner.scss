@@ -11,14 +11,43 @@
     align-items: center;
     justify-content: center;
     background: linear-gradient(0deg, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
-      url(./../../assets/background.jpeg);
+      url(./../../assets/background-1024.jpg);
     background-size: cover;
     background-repeat: no-repeat;
+    background-position: center;
+    width: 100%;
+    max-width: 1170px;
   }
   &-title {
     margin-bottom: 21px;
   }
   &-text {
     margin-bottom: 32px;
+  }
+}
+
+@media (min-width: 1025px) {
+  .banner {
+    &-container {
+      background: linear-gradient(0deg, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
+        url(./../../assets/background-2560.jpg);
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .banner {
+    &-container {
+      height: 500px;
+      background: linear-gradient(0deg, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
+        url(./../../assets/background-768.jpg);
+    }
+  }
+}
+
+@media (max-width: 412px) {
+  .banner {
+    width: calc(100% - 32px);
+    margin-top: -30px;
   }
 }

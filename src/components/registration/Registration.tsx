@@ -1,20 +1,23 @@
-import React, { useState, useCallback } from 'react';
+import React, { useState } from 'react';
 import './registration.scss';
-import ApiService from '../../services/ApiService';
 import { TextInput } from '../inputs/TextInput';
 import { Positions } from '../inputs/Positions';
 import { FileInput } from '../inputs/FileInput';
+import successImg from './../../assets/success-image.svg';
+import ApiService from '../../services/ApiService';
 
 interface Props {
   updateUsers: (page?: number) => Promise<void>;
 }
-let i = 0;
+
 export const Registration = (props: Props) => {
   const [nameInput, setNameInput] = useState<string>('');
   const [emailInput, setEmailInput] = useState<string>('');
   const [phoneInput, setPhoneInput] = useState<string>('');
   const [currentPosition, setCurrentPosition] = useState<number>(0);
   const [file, setFile] = useState<File>();
+  const [filedsFocused, setFiledsFocused] = useState<boolean>(false);
+  const [showSuccessPopup, setShowSuccessPopup] = useState<boolean>(false);
 
   const nameValid = (str: string) => {
     const isValid = str.length >= 2 && str.length <= 60;
@@ -43,13 +46,12 @@ export const Registration = (props: Props) => {
     return isValid;
   };
 
-  console.log(i++);
-
   const checkAllFields = () =>
     nameValid(nameInput) &&
     emailValid(emailInput) &&
     phoneValid(phoneInput) &&
-    fileValid(file);
+    fileValid(file) &&
+    !filedsFocused;
 
   const resetFields = () => {
     setNameInput('');
@@ -67,17 +69,30 @@ export const Registration = (props: Props) => {
     formData.append('email', `${emailInput}`);
     formData.append('phone', `${phoneInput}`);
     formData.append('photo', file as Blob);
-    // const token = (await ApiService().getToken()).token;
-    // await ApiService().addUser(formData, token);
+    const token = (await ApiService().getToken()).token;
+    await ApiService().addUser(formData, token);
+    setShowSuccessPopup(true);
 
     props.updateUsers();
     resetFields();
+    setTimeout(() => setShowSuccessPopup(false), 4000);
   };
 
   return (
-    <section className="registration-container section">
+    <section className="registration-container section" id="registration">
       <div className="registration">
         <h1 className="registration-title">Working with POST request</h1>
+        <div
+          className={`registration-success-container ${
+            showSuccessPopup ? 'active' : ''
+          }`}>
+          <div className="registration-success">
+            <h1 className="registration-success-title">
+              User successfully registered
+            </h1>
+            <img src={successImg} className="registration-success-img"></img>
+          </div>
+        </div>
         <form onSubmit={e => handleSubmit(e)} className="registration-form">
           <TextInput
             inputVal={nameInput}
@@ -86,6 +101,7 @@ export const Registration = (props: Props) => {
             type="text"
             errorText="Please enter a valid name"
             errorHandler={nameValid}
+            setFiledsFocused={setFiledsFocused}
           />
           <TextInput
             inputVal={emailInput}
@@ -94,6 +110,7 @@ export const Registration = (props: Props) => {
             type="text"
             errorText="Please enter a valid email"
             errorHandler={emailValid}
+            setFiledsFocused={setFiledsFocused}
           />
           <TextInput
             inputVal={phoneInput}
@@ -103,6 +120,7 @@ export const Registration = (props: Props) => {
             errorText="Please enter a valid phone number"
             helperText="+38 (XXX) XXX - XX - XX"
             errorHandler={phoneValid}
+            setFiledsFocused={setFiledsFocused}
           />
           <Positions
             currentPosition={currentPosition}
