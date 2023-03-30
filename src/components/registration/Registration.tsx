@@ -17,7 +17,7 @@ export const Registration = (props: Props) => {
   const [currentPosition, setCurrentPosition] = useState<number>(0);
   const [file, setFile] = useState<File>();
   const [filedsFocused, setFiledsFocused] = useState<boolean>(false);
-  const [showSuccessPopup, setShowSuccessPopup] = useState<boolean>(true);
+  const [showSuccessPopup, setShowSuccessPopup] = useState<boolean>(false);
 
   const nameValid = (str: string) => {
     const isValid = str.length >= 2 && str.length <= 60;
@@ -90,7 +90,10 @@ export const Registration = (props: Props) => {
             <h1 className="registration-success-title">
               User successfully registered
             </h1>
-            <img src={successImg} className="registration-success-img"></img>
+            <img
+              src={successImg}
+              alt="success"
+              className="registration-success-img"></img>
           </div>
         </div>
         <form onSubmit={e => handleSubmit(e)} className="registration-form">
