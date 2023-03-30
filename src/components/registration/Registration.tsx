@@ -17,7 +17,7 @@ export const Registration = (props: Props) => {
   const [currentPosition, setCurrentPosition] = useState<number>(0);
   const [file, setFile] = useState<File>();
   const [filedsFocused, setFiledsFocused] = useState<boolean>(false);
-  const [showSuccessPopup, setShowSuccessPopup] = useState<boolean>(false);
+  const [showSuccessPopup, setShowSuccessPopup] = useState<boolean>(true);
 
   const nameValid = (str: string) => {
     const isValid = str.length >= 2 && str.length <= 60;

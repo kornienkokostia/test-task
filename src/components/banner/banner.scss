@@ -11,7 +11,7 @@
     align-items: center;
     justify-content: center;
     background: linear-gradient(0deg, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
-      url(./../../assets/background-1024.jpg);
+      url(./../../assets/background-1024.webp);
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center;
@@ -30,7 +30,7 @@
   .banner {
     &-container {
       background: linear-gradient(0deg, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
-        url(./../../assets/background-2560.jpg);
+        url(./../../assets/background-2560.webp);
     }
   }
 }
@@ -40,7 +40,7 @@
     &-container {
       height: 500px;
       background: linear-gradient(0deg, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
-        url(./../../assets/background-768.jpg);
+        url(./../../assets/background-768.webp);
     }
   }
 }
@@ -49,5 +49,10 @@
   .banner {
     width: calc(100% - 32px);
     margin-top: -30px;
+    &-container {
+      height: 500px;
+      background: linear-gradient(0deg, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
+        url(./../../assets/background-360.webp);
+    }
   }
 }
